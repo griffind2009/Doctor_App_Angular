@@ -9,18 +9,32 @@
 <h2 id="extrainfo">Education: {{vm.doctor.education}}</h2>
 </section>
 
+<h2>Reviews</h2>
 
-<form>
-  <input placeholder="Name" data-ng-model="vm.review.name">
-  <input placeholder="Body" data-ng-model="vm.review.body">
- <button type="button" data-ng-click="vm.create()">Submit a Review</button>
-</form>
 <!-- <div class="user-review">
 <p> Name: {{vm.review.name}} </p>
 <p> Review: {{vm.review.body}} </p>
 </div> -->
 
 <div data-ng-repeat="review in vm.doctor.reviews">
-  <p>Name: {{review.name}}</p>
-  <p>Body: {{review.body}}</p>
+  <table>
+    <tr>
+      <th>{{review.name}}</th>
+      <td>{{review.body}}
+        <button data-ng-click="vm.destroy(review)">Delete</button>
+        <button data-ng-click="vm.update(review)">Update</button>
+      </td>
+      <!-- <a data-ui-sref="reviewEdit({id: review.id})">Edit</a> -->
+
+    </tr>
+  </table>
 </div>
+
+<form>
+  <input placeholder="Name" data-ng-model="vm.review.name">
+  <br>
+  <br>
+  <textarea placeholder="Body" data-ng-model="vm.review.body"></textarea>
+ <button type="button" data-ng-click="vm.create()">Submit a Review</button>
+   <!-- <button data-ng-click="vm.update()">Update</button> -->
+</form>

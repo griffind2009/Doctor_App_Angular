@@ -12,9 +12,9 @@ angular
   DoctorIndexControllerFunction
 ])
 .controller("DoctorShowController", [
-  // "$state",
   "DoctorFactory",
   "ReviewFactory",
+    "$state",
   "$stateParams",
   DoctorShowControllerFunction
 ])
@@ -41,16 +41,27 @@ $('.button').on('click',()=>{
 
 }
 
-function DoctorShowControllerFunction(DoctorFactory, ReviewFactory, $stateParams){
+function DoctorShowControllerFunction(DoctorFactory, ReviewFactory, $state, $stateParams){
   this.doctor = DoctorFactory.get({id: $stateParams.id})
   this.review = new ReviewFactory ();
   this.create = function () {
-    // $state.go("doctorShow",{id: doctor.id})
-  this.review.$save({doctor_id: this.doctor.id})
-    console.log(this.review)
+    this.review.$save({doctor_id: this.doctor.id}).then( review => {
+      this.review = new ReviewFactory ();
+      $state.go("doctorShow",{doctor_id: this.doctor.id}, {reload: true})
+    })
 
+    console.log(this.review)
   }
-}
+    this.update = function(review){
+      this.review.$update({doctor_id: this.doctor.id})
+    }
+    this.destroy = function(review){
+    ReviewFactory.delete({doctor_id: this.doctor.id, id: review.id}).$promise.then( () => {
+
+      $state.go("doctorShow",{doctor_id: this.doctor.id}, {reload: true})
+    })
+   }
+  }
 
 function RouterFunction($stateProvider){
   $stateProvider
