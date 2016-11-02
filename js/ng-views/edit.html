@@ -1,8 +1,7 @@
-<form>
+<form id = "form-review">
   <input value="vm.review.name" data-ng-model="vm.review.name" />
-  <br>
-  <br>
-  <textarea value="vm.review.body" data-ng-model="vm.review.body"></textarea>
+  <div class="reviewbox">
+    <textarea value="vm.review.body" data-ng-model="vm.review.body"></textarea>
+  </div>
   <button data-ng-click="vm.update()">Update</button>
-  <button data-ng-click="vm.destroy()">Delete</button>
 </form>

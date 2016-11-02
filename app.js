@@ -73,9 +73,11 @@ function DoctorShowControllerFunction(DoctorFactory, ReviewFactory, $state, $sta
   }
 
 function ReviewEditControllerFunction (DoctorFactory, ReviewFactory, $state, $stateParams) {
+  this.review = ReviewFactory.get({doctor_id: review.doctor.id)
+  console.log(review)
   this.update = function(review){
-    ReviewFactory.update({ id: review.id}).$promise. then( ()=> {
-      console.log(review)
+    ReviewFactory.update({ id: review.id}).$promise. then( (review) => {
+      console.log("click")
         $state.go("doctorShow",{doctor_id: review.doctor.id}, {reload: true})
     })
   }
@@ -104,12 +106,12 @@ function RouterFunction($stateProvider){
 }
 
 function FactoryFunction( $resource ){
-  return $resource( "http://localhost:3000/doctors/:id", {}, {
+  return $resource( "https://aceso-app.herokuapp.com/doctors/:id", {}, {
         update: { method: "PUT" }
     });
   }
   function ReviewFactoryFunction( $resource ){
-    return $resource( "http://localhost:3000/doctors/:doctor_id/reviews/:id", {}, {
+    return $resource( "https://aceso-app.herokuapp.com/doctors/:doctor_id/reviews/:id", {}, {
           update: { method: "PUT" }
       });
     }
