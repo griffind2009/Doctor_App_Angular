@@ -18,6 +18,13 @@ angular
   "$stateParams",
   DoctorShowControllerFunction
 ])
+.controller("ReviewEditController", [
+  "DoctorFactory",
+  "ReviewFactory",
+    "$state",
+  "$stateParams",
+  ReviewEditControllerFunction
+])
 .factory( "DoctorFactory", [
       "$resource",
     FactoryFunction
@@ -52,9 +59,11 @@ function DoctorShowControllerFunction(DoctorFactory, ReviewFactory, $state, $sta
 
     console.log(this.review)
   }
-    this.update = function(review){
-      this.review.$update({doctor_id: this.doctor.id})
-    }
+    // this.update = function(review){
+    //   this.review.$update({doctor_id: this.doctor.id, id: review.id}).then( review => {
+    //       $state.go("doctorShow",{doctor_id: this.doctor.id}, {reload: true})
+    //   })
+    // }
     this.destroy = function(review){
     ReviewFactory.delete({doctor_id: this.doctor.id, id: review.id}).$promise.then( () => {
 
@@ -62,6 +71,15 @@ function DoctorShowControllerFunction(DoctorFactory, ReviewFactory, $state, $sta
     })
    }
   }
+
+function ReviewEditControllerFunction (DoctorFactory, ReviewFactory, $state, $stateParams) {
+  this.update = function(review){
+    ReviewFactory.update({ id: review.id}).$promise. then( ()=> {
+      console.log(review)
+        $state.go("doctorShow",{doctor_id: review.doctor.id}, {reload: true})
+    })
+  }
+}
 
 function RouterFunction($stateProvider){
   $stateProvider
@@ -77,16 +95,10 @@ function RouterFunction($stateProvider){
       controller: "DoctorShowController",
       controllerAs: "vm"
     })
-    .state("reviewNew", {
-      url: "/doctors/:id",
-      templateUrl: "js/ng-views/show.html",
-      controller: "ReviewNewController",
-      controllerAs: "vm"
-    })
-    .state("reviewShow", {
-      url: "/doctors/:id",
-      templateUrl: "js/ng-views/show.html",
-      controller: "ReviewShowController",
+    .state("reviewEdit", {
+      url: "/doctors/:doctor_id/reviews/:id/edit",
+      templateUrl: "js/ng-views/edit.html",
+      controller: "ReviewEditController",
       controllerAs: "vm"
     })
 }

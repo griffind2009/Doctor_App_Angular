@@ -21,8 +21,8 @@
     <tr>
       <th>{{review.name}}</th>
       <td>{{review.body}}
+          <a data-ui-sref="reviewEdit({doctor_id: this.doctor.id, id: review.id})">Edit</a>
         <button data-ng-click="vm.destroy(review)">Delete</button>
-        <button data-ng-click="vm.update(review)">Update</button>
       </td>
       <!-- <a data-ui-sref="reviewEdit({id: review.id})">Edit</a> -->
 
@@ -38,3 +38,8 @@
  <button type="button" data-ng-click="vm.create()">Submit a Review</button>
    <!-- <button data-ng-click="vm.update()">Update</button> -->
 </form>
+
+
+<!-- <form>
+<input value="vm.review.body" data-ng-model="vm.review.body"></input>
+</form> -->
