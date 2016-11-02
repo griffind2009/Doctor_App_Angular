@@ -10,26 +10,17 @@
 </section>
 
 
-
-<<<<<<< HEAD
 <form>
   <input placeholder="Name" data-ng-model="vm.review.name">
   <input placeholder="Body" data-ng-model="vm.review.body">
  <button type="button" data-ng-click="vm.create()">Submit a Review</button>
 </form>
-<div class="user-review">
+<!-- <div class="user-review">
 <p> Name: {{vm.review.name}} </p>
 <p> Review: {{vm.review.body}} </p>
-</div>
-<div data-ng-repeat="review in vm.reviews">
-  {{review.name}}
-</div>
-=======
-<div data-ng-repeat="review in vm.doctor.reviews">
-  {{review.name}}
-</div>
+</div> -->
 
 <div data-ng-repeat="review in vm.doctor.reviews">
-  {{review.body}}
+  <p>Name: {{review.name}}</p>
+  <p>Body: {{review.body}}</p>
 </div>
->>>>>>> 531302e3e32e1ca633d113cd5b24eb4cfd22816b

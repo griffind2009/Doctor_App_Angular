@@ -12,6 +12,7 @@ angular
   DoctorIndexControllerFunction
 ])
 .controller("DoctorShowController", [
+  // "$state",
   "DoctorFactory",
   "ReviewFactory",
   "$stateParams",
@@ -39,12 +40,11 @@ $('.button').on('click',()=>{
 
 function DoctorShowControllerFunction(DoctorFactory, ReviewFactory, $stateParams){
   this.doctor = DoctorFactory.get({id: $stateParams.id})
-  // this.review = {}
   this.review = new ReviewFactory ();
   this.create = function () {
+    // $state.go("doctorShow",{id: doctor.id})
   this.review.$save({doctor_id: this.doctor.id})
     console.log(this.review)
-    // this.review = {}
 
   }
 }
