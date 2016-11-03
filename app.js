@@ -19,7 +19,7 @@ angular
   DoctorShowControllerFunction
 ])
 .controller("ReviewEditController", [
-  "DoctorFactory",
+  // "DoctorFactory",
   "ReviewFactory",
     "$state",
   "$stateParams",
@@ -43,7 +43,6 @@ this.searchDoctor = ""
 this.searchSpecialty=""
 $('.button').on('click',()=>{
   var keyword = $('#doctor-search').val()
-  console.log(this.doctors)
 })
 
 }
@@ -59,11 +58,7 @@ function DoctorShowControllerFunction(DoctorFactory, ReviewFactory, $state, $sta
 
     console.log(this.review)
   }
-    // this.update = function(review){
-    //   this.review.$update({doctor_id: this.doctor.id, id: review.id}).then( review => {
-    //       $state.go("doctorShow",{doctor_id: this.doctor.id}, {reload: true})
-    //   })
-    // }
+
     this.destroy = function(review){
     ReviewFactory.delete({doctor_id: this.doctor.id, id: review.id}).$promise.then( () => {
 
@@ -72,12 +67,10 @@ function DoctorShowControllerFunction(DoctorFactory, ReviewFactory, $state, $sta
    }
   }
 
-function ReviewEditControllerFunction (DoctorFactory, ReviewFactory, $state, $stateParams) {
-  this.review = ReviewFactory.get({doctor_id: review.doctor.id)
-  console.log(review)
-  this.update = function(review){
-    ReviewFactory.update({ id: review.id}).$promise. then( (review) => {
-      console.log("click")
+function ReviewEditControllerFunction ( ReviewFactory, $state, $stateParams) {
+  // this.review = ReviewFactory.get({id: review.id, doctor_id: review.doctor.id})
+  this.update = function(response){
+    this.review.$update({ doctor_id: this.doctor.id, id: review.id}).$promise. then( response => {
         $state.go("doctorShow",{doctor_id: review.doctor.id}, {reload: true})
     })
   }
@@ -112,6 +105,6 @@ function FactoryFunction( $resource ){
   }
   function ReviewFactoryFunction( $resource ){
     return $resource( "https://aceso-app.herokuapp.com/doctors/:doctor_id/reviews/:id", {}, {
-          update: { method: "PUT" }
+          update: { method: "PATCH" }
       });
     }

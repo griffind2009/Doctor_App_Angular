@@ -11,10 +11,6 @@
 
 <h2>Reviews</h2>
 
-<!-- <div class="user-review">
-<p> Name: {{vm.review.name}} </p>
-<p> Review: {{vm.review.body}} </p>
-</div> -->
 
 <div data-ng-repeat="review in vm.doctor.reviews">
   <table>
@@ -22,9 +18,8 @@
       <th>{{review.name}}</th>
       <td>{{review.body}}
           <a data-ui-sref="reviewEdit({doctor_id: this.doctor.id, id: review.id})">Edit</a>
-        <button data-ng-click="vm.destroy(review)">Delete</button>
+        <button class="button" data-ng-click="vm.destroy(review)">Delete</button>
       </td>
-      <!-- <a data-ui-sref="reviewEdit({id: review.id})">Edit</a> -->
 
     </tr>
   </table>
@@ -35,11 +30,5 @@
   <br>
   <br>
   <textarea placeholder="Body" data-ng-model="vm.review.body"></textarea>
- <button type="button" data-ng-click="vm.create()">Submit a Review</button>
-   <!-- <button data-ng-click="vm.update()">Update</button> -->
+ <button class="button-submit" type="button" data-ng-click="vm.create()">Submit a Review</button>
 </form>
-
-
-<!-- <form>
-<input value="vm.review.body" data-ng-model="vm.review.body"></input>
-</form> -->

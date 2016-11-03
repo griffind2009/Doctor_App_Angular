@@ -15,11 +15,13 @@
 
     }
     h1{
+      color: blue;
       font-size: 60px;
       margin-bottom: 0;
       font-variant: small-caps;
       font-weight: 100;
       font-kerning: auto;
+      padding: 10px;
     }
       .search {
         display: inline-block;
@@ -36,14 +38,11 @@
       <div class="search">
         <form id="search">
           <input type="search" placeholder="Search Name and Specialty" id="doctor-search" ng-model= "search">
-          <!-- <input type="search" placeholder="specialty" ng-model="vm.searchSpecialty"> -->
+
         </form>
       </div>
       <div class="search">
         <select ng-options="(doctor.name +', ' + doctor.specialty) for doctor in vm.doctors | filter: search " id="doctor-select" ng-model="vm.currentDoctor">
-          <!-- <option ng-repeat="doctor in vm.doctors | filter: search ">{{doctor.name}},{{doctor.specialty}}</option> -->
-
-          <!-- <a data-ui-sref="doctorShow({id: doctor.id})" >{{doctor.name}},{{doctor.specialty}}</a> -->
         </select>
       </div>
       <div class="search">
