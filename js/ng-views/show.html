@@ -1,12 +1,12 @@
 <div id="profile">
-<img data-ng-src="{{vm.doctor.img_url}}">
+  <img data-ng-src="{{vm.doctor.img_url}}">
 </div>
 <section>
-<h1 id="prof">{{vm.doctor.name}}</h1>
-<h2>Qualifications</h2>
-<h2 id="extrainfo">Specialty: {{vm.doctor.specialty}}</h2>
-<h2 id="extrainfo">Practice: {{vm.doctor.practice}}</h2>
-<h2 id="extrainfo">Education: {{vm.doctor.education}}</h2>
+  <h1 id="prof">{{vm.doctor.name}}</h1>
+  <h2>Qualifications</h2>
+  <h2 id="extrainfo">Specialty: {{vm.doctor.specialty}}</h2>
+  <h2 id="extrainfo">Practice: {{vm.doctor.practice}}</h2>
+  <h2 id="extrainfo">Education: {{vm.doctor.education}}</h2>
 </section>
 
 <h2>Reviews</h2>
@@ -17,7 +17,7 @@
     <tr>
       <th>{{review.name}}</th>
       <td>{{review.body}}
-          <a data-ui-sref="reviewEdit({doctor_id: this.doctor.id, id: review.id})">Edit</a>
+        <a data-ui-sref="reviewEdit({doctor_id: this.doctor.id, id: review.id})">Edit</a>
         <button class="button" data-ng-click="vm.destroy(review)">Delete</button>
       </td>
 
@@ -30,5 +30,5 @@
   <br>
   <br>
   <textarea placeholder="Body" data-ng-model="vm.review.body"></textarea>
- <button class="button-submit" type="button" data-ng-click="vm.create()">Submit a Review</button>
+  <button class="button-submit" type="button" data-ng-click="vm.create()">Submit a Review</button>
 </form>
