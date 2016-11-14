@@ -5,6 +5,7 @@ angular
 ])
 .config([
   "$stateProvider",
+  "$locationProvider",
   RouterFunction
 ])
 .controller("DoctorIndexController", [
@@ -19,7 +20,6 @@ angular
   DoctorShowControllerFunction
 ])
 .controller("ReviewEditController", [
-  // "DoctorFactory",
   "ReviewFactory",
     "$state",
   "$stateParams",
@@ -35,16 +35,7 @@ angular
         ]);
 
 function DoctorIndexControllerFunction(DoctorFactory){
-  this.testSelect = function(){
-    console.log(this.currentDoctor)
-  }
-this.doctors = DoctorFactory.query()
-this.searchDoctor = ""
-this.searchSpecialty=""
-$('.button').on('click',()=>{
-  var keyword = $('#doctor-search').val()
-})
-
+  this.doctors = DoctorFactory.query()
 }
 
 function DoctorShowControllerFunction(DoctorFactory, ReviewFactory, $state, $stateParams){
@@ -55,13 +46,9 @@ function DoctorShowControllerFunction(DoctorFactory, ReviewFactory, $state, $sta
       this.review = new ReviewFactory ();
       $state.go("doctorShow",{doctor_id: this.doctor.id}, {reload: true})
     })
-
-    console.log(this.review)
   }
-
     this.destroy = function(review){
     ReviewFactory.delete({doctor_id: this.doctor.id, id: review.id}).$promise.then( () => {
-
       $state.go("doctorShow",{doctor_id: this.doctor.id}, {reload: true})
     })
    }
@@ -69,15 +56,15 @@ function DoctorShowControllerFunction(DoctorFactory, ReviewFactory, $state, $sta
 
 function ReviewEditControllerFunction ( ReviewFactory, $state, $stateParams) {
   // this.review = ReviewFactory.get({id: review.id, doctor_id: review.doctor.id})
+  this.review.$update({ doctor_id: this.doctor.id, id: review.id}).promise. then( response => {
   this.update = function(response){
-    this.review.$update({ doctor_id: this.doctor.id, id: review.id}).$promise. then( response => {
         $state.go("doctorShow",{doctor_id: review.doctor.id}, {reload: true})
     })
   }
 }
 
-function RouterFunction($stateProvider){
-  $stateProvider
+function RouterFunction($stateProvider, $locationProvider){
+  $stateProvider, $locationProvider.html5Mode(true);
     .state("doctorIndex", {
       url: "/doctors",
       templateUrl: "js/ng-views/index.html",
@@ -105,6 +92,6 @@ function FactoryFunction( $resource ){
   }
   function ReviewFactoryFunction( $resource ){
     return $resource( "https://aceso-app.herokuapp.com/doctors/:doctor_id/reviews/:id", {}, {
-          update: { method: "PATCH" }
+          update: { method: "PUT" }
       });
     }
